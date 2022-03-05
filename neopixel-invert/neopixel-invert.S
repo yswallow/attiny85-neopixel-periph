@@ -25,6 +25,7 @@ setup:
 .global loop
 .func loop
 loop:
+    cli;
     ldi r18, 1;
     sbi 0x17,2 ; set B2 as output
     cbi 0x17,3 ; set B3 as input
@@ -39,7 +40,7 @@ ignore_input_high1:
     rjmp ignore_input_high1;
     cpi r20, 3;
     brmi ignore_input_low1_pre;
-    cbr r23, 7;
+    cbr r23, 128;
 ignore_input_low1_pre:
     clr r20;
 ignore_input_low1:
@@ -52,7 +53,7 @@ ignore_input_high2:
     rjmp ignore_input_high2;
     cpi r20, 3;
     brmi ignore_input_low2_pre;
-    cbr r23, 6;
+    cbr r23, 64;
 ignore_input_low2_pre:
     clr r20;
 ignore_input_low2:
@@ -65,7 +66,7 @@ ignore_input_high3:
     rjmp ignore_input_high3;
     cpi r20, 3;
     brmi ignore_input_low_pre3;
-    cbr r23, 5;
+    cbr r23, 32;
 ignore_input_low_pre3:
     clr r20;
 ignore_input_low3:
@@ -78,7 +79,7 @@ ignore_input_high4:
     rjmp ignore_input_high4;
     cpi r20, 3;
     brmi ignore_input_low_pre4;
-    cbr r23, 4;
+    cbr r23, 16;
 ignore_input_low_pre4:
     clr r20;
 ignore_input_low4:
@@ -91,7 +92,7 @@ ignore_input_high5:
     rjmp ignore_input_high5;
     cpi r20, 3;
     brmi ignore_input_low_pre5;
-    cbr r23, 3;
+    cbr r23, 8;
 ignore_input_low_pre5:
     clr r20;
 ignore_input_low5:
@@ -104,7 +105,7 @@ ignore_input_high6:
     rjmp ignore_input_high6;
     cpi r20, 3;
     brmi ignore_input_low_pre6;
-    cbr r23, 2;
+    cbr r23, 4;
 ignore_input_low_pre6:
     clr r20;
 ignore_input_low6:
@@ -117,7 +118,7 @@ ignore_input_high7:
     rjmp ignore_input_high7;
     cpi r20, 3;
     brmi ignore_input_low_pre7;
-    cbr r23, 1;
+    cbr r23, 2;
 ignore_input_low_pre7:
     clr r20;
 ignore_input_low7:
@@ -130,7 +131,7 @@ ignore_input_high8:
     rjmp ignore_input_high8;
     cpi r20, 3;
     brmi ignore_input_low_pre8;
-    cbr r23, 0;
+    cbr r23, 1;
 ignore_input_low_pre8:
     clr r20;
 ignore_input_low8:
@@ -143,7 +144,7 @@ ignore_input_high9:
     rjmp ignore_input_high9;
     cpi r20, 3;
     brmi ignore_input_low_pre9;
-    cbr r24, 7;
+    cbr r24, 128;
 ignore_input_low_pre9:
     clr r20;
 ignore_input_low9:
@@ -156,7 +157,7 @@ ignore_input_high10:
     rjmp ignore_input_high10;
     cpi r20, 3;
     brmi ignore_input_low_pre10;
-    cbr r24, 6;
+    cbr r24, 64;
 ignore_input_low_pre10:
     clr r20;
 ignore_input_low10:
@@ -169,7 +170,7 @@ ignore_input_high11:
     rjmp ignore_input_high11;
     cpi r20, 3;
     brmi ignore_input_low_pre11;
-    cbr r24, 5;
+    cbr r24, 32;
 ignore_input_low_pre11:
     clr r20;
 ignore_input_low11:
@@ -182,7 +183,7 @@ ignore_input_high12:
     rjmp ignore_input_high12;
     cpi r20, 3;
     brmi ignore_input_low_pre12;
-    cbr r24, 4;
+    cbr r24, 16;
 ignore_input_low_pre12:
     clr r20;
 ignore_input_low12:
@@ -195,7 +196,7 @@ ignore_input_high13:
     rjmp ignore_input_high13;
     cpi r20, 3;
     brmi ignore_input_low_pre13;
-    cbr r24, 3;
+    cbr r24, 8;
 ignore_input_low_pre13:
     clr r20;
 ignore_input_low13:
@@ -208,7 +209,7 @@ ignore_input_high14:
     rjmp ignore_input_high14;
     cpi r20, 3;
     brmi ignore_input_low_pre14;
-    cbr r24, 2;
+    cbr r24, 4;
 ignore_input_low_pre14:
     clr r20;
 ignore_input_low14:
@@ -221,7 +222,7 @@ ignore_input_high15:
     rjmp ignore_input_high15;
     cpi r20, 3;
     brmi ignore_input_low_pre15;
-    cbr r24, 1;
+    cbr r24, 2;
 ignore_input_low_pre15:
     clr r20;
 ignore_input_low15:
@@ -234,7 +235,7 @@ ignore_input_high16:
     rjmp ignore_input_high16;
     cpi r20, 3;
     brmi ignore_input_low_pre16;
-    cbr r24, 0;
+    cbr r24, 1;
 ignore_input_low_pre16:
     clr r20;
 ignore_input_low16:
@@ -247,7 +248,7 @@ ignore_input_high17:
     rjmp ignore_input_high17;
     cpi r20, 3;
     brmi ignore_input_low_pre17;
-    cbr r25, 7;
+    cbr r25, 128;
 ignore_input_low_pre17:
     clr r20;
 ignore_input_low17:
@@ -260,7 +261,7 @@ ignore_input_high18:
     rjmp ignore_input_high18;
     cpi r20, 3;
     brmi ignore_input_low_pre18;
-    cbr r25, 6;
+    cbr r25, 64;
 ignore_input_low_pre18:
     clr r20;
 ignore_input_low18:
@@ -273,7 +274,7 @@ ignore_input_high19:
     rjmp ignore_input_high19;
     cpi r20, 3;
     brmi ignore_input_low_pre19;
-    cbr r25, 5;
+    cbr r25, 32;
 ignore_input_low_pre19:
     clr r20;
 ignore_input_low19:
@@ -286,7 +287,7 @@ ignore_input_high20:
     rjmp ignore_input_high20;
     cpi r20, 3;
     brmi ignore_input_low_pre20;
-    cbr r25, 4;
+    cbr r25, 16;
 ignore_input_low_pre20:
     clr r20;
 ignore_input_low20:
@@ -299,7 +300,7 @@ ignore_input_high21:
     rjmp ignore_input_high21;
     cpi r20, 3;
     brmi ignore_input_low_pre21;
-    cbr r25, 3;
+    cbr r25, 8;
 ignore_input_low_pre21:
     clr r20;
 ignore_input_low21:
@@ -312,7 +313,7 @@ ignore_input_high22:
     rjmp ignore_input_high22;
     cpi r20, 3;
     brmi ignore_input_low_pre22;
-    cbr r25, 2;
+    cbr r25, 4;
 ignore_input_low_pre22:
     clr r20;
 ignore_input_low22:
@@ -325,7 +326,7 @@ ignore_input_high23:
     rjmp ignore_input_high23;
     cpi r20, 3;
     brmi ignore_input_low_pre23;
-    cbr r25, 1;
+    cbr r25, 2;
 ignore_input_low_pre23:
     clr r20;
 ignore_input_low23:
@@ -338,7 +339,7 @@ ignore_input_high24:
     rjmp ignore_input_high24;
     cpi r20, 3;
     brmi ignore_input_low_pre24;
-    cbr r25, 0;
+    cbr r25, 1;
 ignore_input_low_pre24:
     clr r20;
 ignore_input_low24:
@@ -366,10 +367,10 @@ input_is_low:
   r25: R
 */
 write_pwm:
-    ;push r25;
-    ;push r24;
-    mov r8, r25;
-    mov r7, r24;
+    push r25;
+    push r24;
+    ;mov r8, r25;
+    ;mov r7, r24;
     /* analogWrite(PIN_0, 2);*/
     ldi r25, 0;
     ldi r24, 0;
@@ -380,15 +381,15 @@ write_pwm:
     ldi r25, 0;
     ldi r23, 0;
     ldi r24, 1;
-    ;pop r22;
-    mov r22, r7;
+    pop r22;
+    ;mov r22, r7;
     rcall analogWrite;
 
     ldi r25, 0;
     ldi r23, 0;
     ldi r24, 4;
-    ;pop r22;
-    mov r22, r8;
+    pop r22;
+    ;mov r22, r8;
     rcall analogWrite;
 
     
