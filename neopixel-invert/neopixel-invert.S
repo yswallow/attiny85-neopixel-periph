@@ -1,4 +1,3 @@
-/* #include <avr/io.h> */
 /*
  * DDRB:  0x17
  * PORTB: 0x18
@@ -39,8 +38,6 @@ loop:
     
 ignore:
 ;1
-    nop;
-    nop;
     sbis 0x16, INPUT_PIN;
     rjmp ignore_input_low1;
     sbis 0x16, INPUT_PIN;
