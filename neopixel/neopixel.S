@@ -10,29 +10,22 @@
  * r25: B
  */
 
-/*
- * input: 2
- * output: 3
- */
-
 #define INPUT_PIN 2
 #define OUTPUT_PIN 3
 
-#define GREEN_PIN 0
-#define RED_PIN 1
-#define BLUE_PIN 4
+#define PB0_REG r23
+#define PB1_REG r24
+#define PB4_REG r25
 
-//#define OUTPUT_INVERT
-#define OUTPUT_POSITIVE
+#define OUTPUT_INVERT
+//#define OUTPUT_POSITIVE
 
-#if defined(OUTPUT_INVERT)
-#if defined(OUTPUT_POSITIVE)
+#if defined(OUTPUT_POSITIVE) && defined(OUTPUT_INVERT)
 #error "OUTPUT_INVERT and OUTPUT_POSITIVE must not be defined same time."
-#else
-#define SET_BIT cbr 
-#endif 
 #elif defined(OUTPUT_POSITIVE)
 #define SET_BIT sbr
+#elif defined(OUTPUT_INVERT)
+#define SET_BIT cbr
 #else
 #error "OUTPUT_INVERT or OUTPUT_POSITIVE must be defined"
 #endif
@@ -48,7 +41,21 @@
 .global setup
 .func setup
 setup:
+    ldi r21, 0x13;
+    out 0x17, r21; // set P0,1,4 output
     
+    in r21, 0x2A;
+    sbr r21, 0x81; //set P0(G) OC0A enable, WGM:Phase Correct PWM
+    out 0x2A, r21;
+
+    in r21, 0x2C;
+    sbr r21, 0x60; //set P4(B) OC1B enable and PWM1A enable
+    out 0x2C, r21;
+
+    in r21, 0x30;
+    sbr r21, 0x60; //set P1(R) OC1A enable and PWM1B enable
+    out 0x30, r21;
+
 .endfunc
 
 .global loop
@@ -501,33 +508,11 @@ input_is_low:
     rjmp pass_through;
     rjmp write_pwm;
 
-/*
- * PB0: G
- * PB1: R
- * PB4: B
- */
 write_pwm:
-    push r25;
-    push r24;
+    out 0x29, PB0_REG; G: OC0A/PB0
+    out 0x2E, PB1_REG; R: OC1A/PB1
+    out 0x2B, PB4_REG; B: OC1B/PB4
     
-    ldi r25, 0;
-    ldi r24, GREEN_PIN;
-    mov r22,r23;
-    ldi r23, 0;
-    rcall analogWrite;
-
-    ldi r25, 0;
-    ldi r23, 0;
-    ldi r24, RED_PIN;
-    pop r22;
-    rcall analogWrite;
-
-    ldi r25, 0;
-    ldi r23, 0;
-    ldi r24, BLUE_PIN;
-    pop r22;
-    rcall analogWrite;
-
 wait_prepare:
 #if defined(OUTPUT_POSITIVE)
     clr r23;
